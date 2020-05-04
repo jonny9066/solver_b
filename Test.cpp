@@ -44,7 +44,7 @@ TEST_CASE("Test real division") {
     RealVariable x;
     CHECK(solve(x/2==2) == 4.0);
     CHECK(solve(5==x/10) == 50.0);
-    CHECK(solve(5==x/50) == 0.1);
+    CHECK(solve(5==x/50) == 250);
     CHECK(solve(x/1==2) == 2.0);
     CHECK(solve(x/2==4) == 8.0);
 }
@@ -84,10 +84,7 @@ TEST_CASE("Test exponent constrains") {
     CHECK_THROWS(solve((x^-1)==0));
     CHECK_THROWS(solve((x^3)==0));
     CHECK_THROWS(solve((x^0)==0));
-}
-TEST_CASE("Test real multiple equals signs") {
-    RealVariable x;
-    CHECK_THROWS(solve(x==0==0));
+    CHECK_THROWS(solve((x^2)*(x^1)==0));
 }
 
 
@@ -106,13 +103,13 @@ TEST_CASE("Test basic complex equations") {
 TEST_CASE("Test complex addittion") {
     ComplexVariable x;
     CHECK(solve(x+1.0i==complex(2.0)) == complex(2.0)-1i);
-    CHECK(solve(5i==x+10.0) == 5i-complex(-10.0));
+    CHECK(solve(5i==x+10.0) == 5i+complex(-10.0));
     CHECK(solve(5==x+10i) == complex(5.0)-10i);
 }
 TEST_CASE("Test complex subtraction") {
     ComplexVariable x;
     CHECK(solve(x-1i==complex(2.0)) == complex(2.0)+1i);
-    CHECK(solve(5i==x-10) == 5i-complex(10.0));
+    CHECK(solve(5i==x-10) == 5i+complex(10.0));
     CHECK(solve(5==x-10i) == complex(5.0)+10i);
 }
 TEST_CASE("Test complex multiplication") {
@@ -156,10 +153,8 @@ TEST_CASE("Test complex exponent constrains") {
     CHECK_THROWS(solve((x^-1)==0));
     CHECK_THROWS(solve((x^3)==0));
     CHECK_THROWS(solve((x^0)==0));
-}
-TEST_CASE("Test multiple equals signs") {
-    ComplexVariable x;
-    CHECK_THROWS(solve(x==0==0));
+    CHECK_THROWS(solve((x^2)*(x^1)==0));
+
 }
 
 
@@ -182,13 +177,13 @@ TEST_CASE("Test basic complex equations") {
 TEST_CASE("Test complex addittion") {
     ComplexVariable x;
     CHECK(solve(x+1.0i==complex(2.0)) == complex(2.0)-1i);
-    CHECK(solve(5i==x+10.0) == 5i-complex(-10.0));
+    CHECK(solve(5i==x+10.0) == 5i+complex(-10.0));
     CHECK(solve(5==x+10i) == complex(5.0)-10i);
 }
 TEST_CASE("Test complex subtraction") {
     ComplexVariable x;
     CHECK(solve(x-1i==complex(2.0)) == complex(2.0)+1i);
-    CHECK(solve(5i==x-10) == 5i-complex(10.0));
+    CHECK(solve(5i==x-10) == 5i+complex(10.0));
     CHECK(solve(5==x-10i) == complex(5.0)+10i);
 }
 TEST_CASE("Test complex multiplication") {
@@ -232,5 +227,5 @@ TEST_CASE("Test complex exponent constrains") {
     CHECK_THROWS(solve((x^-1)==0));
     CHECK_THROWS(solve((x^3)==0));
     CHECK_THROWS(solve((x^0)==0));
-
+     CHECK_THROWS(solve((x^2)*(x^1)==0));
 }
